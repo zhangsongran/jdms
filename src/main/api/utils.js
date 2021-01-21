@@ -25,7 +25,6 @@ export const handleResponse = (resp) => {
     }
   }
   const isSuc = statusCode === 200
-  // request logs
   if (process.env.NODE_ENV !== 'production') {
     logger.info(
       `${request.href} %c${isSuc ? 'Success' : 'Failed'}:`,
