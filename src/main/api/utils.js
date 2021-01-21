@@ -36,6 +36,25 @@ export const handleResponse = (resp) => {
   return result
 }
 
+export const handleHtmlResponse = (resp) => {
+  const { body, statusCode, request } = resp
+  let result = body
+
+  const parser = new DOMParser()
+  // 解析返回的HTML代码
+  result = parser.parseFromString(body, 'text/html')
+  const isSuc = statusCode === 200
+  // request logs
+  if (process.env.NODE_ENV !== 'production') {
+    logger.info(
+      `${request.href} %c${isSuc ? 'Success' : 'Failed'}:`,
+      `color: ${isSuc ? 'green' : 'red'}`,
+      isSuc ? result : statusCode
+    )
+  }
+  return result
+}
+
 function parseJson(body) {
   if (typeof body === 'string') {
     const match = body.match(/\{(.*)\}/)

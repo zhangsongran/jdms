@@ -3,7 +3,7 @@
  */
 import request from 'request-promise'
 import URLS from './url'
-import { handleResponse, getRandomArbitrary, encryptPayPassword } from './utils'
+import { handleResponse, handleHtmlResponse, getRandomArbitrary, encryptPayPassword } from './utils'
 // import log from 'electron-log'
 
 const UserAgent =
@@ -293,7 +293,7 @@ export function getGoodInfo(skuId) {
     },
     resolveWithFullResponse: true
   }).then((resp) => {
-    const dom = handleResponse(resp)
+    const dom = handleHtmlResponse(resp)
     const pageConfig = dom.querySelectorAll('script')[0].innerText
     const imageSrc = dom.querySelector('#spec-img').dataset.origin
     const name = pageConfig.match(/name: '(.*)'/)[1]
