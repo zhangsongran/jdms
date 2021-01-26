@@ -92,7 +92,7 @@ const createKillOrder = async function(task, account) {
       message: '抢购失败，请查看登录状态'
     }
   }
-  const result = await jd.seckillOrderSubmit(account.cookie, skuId, buyNum, buyInfo)
+  const result = await jd.seckillOrderSubmit(account, skuId, buyNum, buyInfo)
   if (!result) {
     return {
       success: false,

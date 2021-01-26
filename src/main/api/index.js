@@ -95,7 +95,7 @@ export function getBuyInfo(Cookie, skuId, buyNum) {
  * @param buyInfo
  * @returns {Promise<any>}
  */
-export function seckillOrderSubmit(Cookie, skuId, buyNum, buyInfo) {
+export function seckillOrderSubmit(account, skuId, buyNum, buyInfo) {
   const params = {
     skuId,
     num: buyNum,
@@ -120,14 +120,14 @@ export function seckillOrderSubmit(Cookie, skuId, buyNum, buyInfo) {
     invoicePhone: buyInfo['invoiceInfo']['invoicePhone'],
     invoicePhoneKey: buyInfo['invoiceInfo']['invoicePhoneKey'],
     invoice: true,
-    password: '',
+    password: account.payPassword,
     codTimeType: 3,
     paymentType: 4,
     areaCode: '',
     overseas: 0,
     phone: '',
-    eid: '',
-    fp: '',
+    eid: account.eid,
+    fp: account.fp,
     token: buyInfo['token'],
     pru: ''
   }
@@ -136,7 +136,7 @@ export function seckillOrderSubmit(Cookie, skuId, buyNum, buyInfo) {
     uri: URLS.SECKILL_ORDER_SUBMIT,
     form: params,
     headers: {
-      Cookie,
+      Cookie: account.cookie,
       'User-Agent': UserAgent,
       'Content-Type': ContentType
     },

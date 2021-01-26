@@ -5,7 +5,7 @@ const apiMap = new Map([
   ['cookieCheck', ['Cookie']],
   ['getSeckillUrl', ['skuId']],
   ['getBuyInfo', ['Cookie', 'skuId', 'buyNum']],
-  ['seckillOrderSubmit', ['Cookie', 'skuId', 'buyNum', 'buyInfo']],
+  ['seckillOrderSubmit', ['account', 'skuId', 'buyNum', 'buyInfo']],
   ['cartSelectAll', ['Cookie']],
   ['cartClearAll', ['Cookie']],
   ['cartAddGood', ['Cookie', 'skuId', 'buyNum']],
