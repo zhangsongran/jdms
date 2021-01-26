@@ -22,5 +22,9 @@ export default {
   // 获取京东服务器时间
   GET_SERVER_TIME: 'https://a.jd.com//ajax/queryServerData.html',
   // 获取商品价格
-  GET_GOOD_PRICE: 'http://p.3.cn/prices/mgets'
+  GET_GOOD_PRICE: 'http://p.3.cn/prices/mgets',
+  // 访问抢购订单结算页
+  SECKILL_ORDER_ACCESS: 'https://marathon.jd.com/seckill/seckill.action',
+  // 商品预约
+  RESERVE_URL: 'https://yushou.jd.com/youshouinfo.action'
 }

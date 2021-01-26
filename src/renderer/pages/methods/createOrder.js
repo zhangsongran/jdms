@@ -77,11 +77,13 @@ const createReserveOrder = async function(task, account) {
 }
 
 /**
- * 秒杀
+ * 秒杀(飞天,茅台)
  * 1.直接提交订单，但是目前没有找到合适的商品测试过
  */
 const createKillOrder = async function(task, account) {
   const { skuId, buyNum } = task
+  //访问订单结算页面
+  await jd.requestSeckillCheckoutPage(skuId, buyNum)
   // 获取商品订单
   const buyInfo = await jd.getBuyInfo(account.cookie, skuId, buyNum)
   if (buyInfo.code !== '200') {

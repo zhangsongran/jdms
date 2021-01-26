@@ -8,7 +8,7 @@
           </a-select-option>
         </a-select>
       </a-form-model-item>
-      <template v-if="[1, 2].includes(formParams.taskType)">
+      <template v-if="[1, 2, 4].includes(formParams.taskType)">
         <a-form-model-item label="定时" prop="isSetTime">
           <a-switch v-model="formParams.isSetTime" />
         </a-form-model-item>

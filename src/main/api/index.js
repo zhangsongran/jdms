@@ -379,3 +379,59 @@ export function getGoodPrice(skuId) {
     return null
   })
 }
+
+/**
+ *  访问抢购订单结算页面
+ * @param skuId
+ * @returns {*}
+ */
+export function requestSeckillCheckoutPage(skuId, seckillNum) {
+  const params = {
+    skuId: skuId,
+    num: seckillNum,
+    rid: +new Date()
+  }
+  return request({
+    uri: URLS.SECKILL_ORDER_ACCESS,
+    form: params,
+    headers: {
+      'User-Agent': UserAgent,
+      Host: 'marathon.jd.com',
+      Referer: `https://item.jd.com/${skuId}.html`
+    },
+    resolveWithFullResponse: true
+  })
+}
+
+/**
+ * 商品预约
+ */
+export function makeReserve(Cookie, skuId) {
+  return request({
+    uri: URLS.RESERVE_URL,
+    headers: {
+      Cookie,
+      'User-Agent': UserAgent,
+      Referer: `https://item.jd.com/${skuId}.html`
+    },
+    qs: {
+      callback: 'fetchJSON',
+      sku: skuId,
+      _: new Date()
+    },
+    resolveWithFullResponse: true
+  }).then((resp) => {
+    const data = handleResponse(resp)
+    const url = data.url
+    return request({
+      headers: {
+        Cookie,
+        'User-Agent': UserAgent,
+        Referer: `https://item.jd.com/${skuId}.html`
+      },
+      uri: 'https:' + url,
+    }).then(() => {
+      return true
+    })
+  })
+}

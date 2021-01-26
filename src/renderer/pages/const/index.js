@@ -19,5 +19,12 @@ export const taskMap = new Map([
       text: '查询库存自动下单',
       desc: '开始轮询查询库存情况'
     }
+  ],
+  [
+    4,
+    {
+      text: 'plus预约抢购',
+      desc: '该商品是预约抢购商品，商品无法加入购物车，需要是plus会员'
+    }
   ]
 ])

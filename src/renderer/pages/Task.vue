@@ -33,6 +33,7 @@
         </a>
         <!-- 更多 -->
         <more-actions slot="actions">
+          <a @click="makerReserve(item)">商品预约</a>
           <a @click="addToCart(item)">加入购物车</a>
           <a @click="editTask(item)">修改任务</a>
           <a @click="deleteTask(item.id)">删除任务</a>
@@ -89,6 +90,22 @@ export default {
     },
     openExternal(skuId) {
       shell.openExternal(`https://item.jd.com/${skuId}.html`)
+    },
+    makerReserve({ skuId }) {
+      this.accountList.map(async (account) => {
+        const success = await jd.makeReserve(account.cookie, skuId)
+        if (success) {
+          this.logger_message.success({
+            message: `商品已加入账号「${account.name}」预约`,
+            label: skuId
+          })
+        } else {
+          this.logger_message.error({
+            message: `商品加入账号「${account.name}」预约失败`,
+            label: skuId
+          })
+        }
+      })
     },
     addToCart({ skuId, buyNum }) {
       this.accountList.map(async (account) => {
